@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairMakerCRM.Api", "HairMakerCRM\HairMakerCRM.Api.csproj", "{38D5BDB8-B668-4AE5-9DC6-01D57ADEDD85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HairMakerCRM.Core", "HairMakerCRM.Core\HairMakerCRM.Core.csproj", "{707EB129-7892-47C2-89E9-5B4D6F80ED96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38D5BDB8-B668-4AE5-9DC6-01D57ADEDD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D5BDB8-B668-4AE5-9DC6-01D57ADEDD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D5BDB8-B668-4AE5-9DC6-01D57ADEDD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D5BDB8-B668-4AE5-9DC6-01D57ADEDD85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{707EB129-7892-47C2-89E9-5B4D6F80ED96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707EB129-7892-47C2-89E9-5B4D6F80ED96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707EB129-7892-47C2-89E9-5B4D6F80ED96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707EB129-7892-47C2-89E9-5B4D6F80ED96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C28A5CAE-625C-4FA6-90B8-DD380D5AFAE1}
+	EndGlobalSection
+EndGlobal
