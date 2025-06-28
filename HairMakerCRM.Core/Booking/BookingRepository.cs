@@ -12,7 +12,7 @@ public interface IBookingRepository
 
     Task Delete(Guid id);
 
-    Task<IEnumerable<BookingItem>> GetByDateRange(DateTime startTime, DateTime endTime);
+    Task<IEnumerable<BookingItem>> GetByDateRangeAndMaster(DateTime startTime, DateTime endTime, Master master);
 
     Task UpdateStatus(Guid id, BookingStatus newStatus);
 }
@@ -79,12 +79,17 @@ public class BookingRepositoryMock : IBookingRepository
         return await Task.FromResult(_bookingItems);
     }
 
-    public async Task<IEnumerable<BookingItem>> GetByDateRange(DateTime startTime, DateTime endTime)
+    public async Task<IEnumerable<BookingItem>> GetByDateRange(
+        DateTime startTime, 
+        DateTime endTime,
+        Master master)
     {
         return await Task.FromResult(
             _bookingItems.Where(el => 
-            el.StartTime <=  startTime && 
-            el.EndTime <= endTime).ToList());
+                master.Name == el.Master.Name &&
+                el.StartTime <=  startTime && 
+                el.EndTime <= endTime)
+            .ToList());
     }
 
     public async Task<BookingItem?> GetById(Guid id)

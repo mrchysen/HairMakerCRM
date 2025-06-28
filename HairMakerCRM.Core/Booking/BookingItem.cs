@@ -4,6 +4,7 @@ public record BookingItem(
     Guid Id, 
     List<BargainItem> BargainItems, 
     Customer Customer,
+    Master Master,
     string Description,
     DateTime StartTime,
     DateTime EndTime,
