@@ -1,5 +1,4 @@
 ﻿using HairMakerCRM.Core.Users;
-using System.Diagnostics.Metrics;
 
 namespace HairMakerCRM.Core.Booking;
 
@@ -13,29 +12,34 @@ public interface IBookingService
 
 public class BookingService(
     IBookingRepository bookingRepository,
-    IBookingTimeResolver timeResolver) : IBookingService
+    IBookingTimeResolver timeResolver,
+    IAuthenticatedUser authenticatedUser) : IBookingService
 {
-    public Task<BookingItem?> CreateBooking(
-        DateTime StartTime,
-        List<BargainItem> BargainItems,
-        Master ChosenMaster)
+    public async Task<BookingItem?> CreateBooking(
+        DateTime startTime,
+        List<BargainItem> bargainItems,
+        Master chosenMaster)
     {
-        var timing = timeResolver.Resolve(
-            BargainItems, 
-            ChosenMaster, 
-            StartTime);
+        var timing = await timeResolver.Resolve(
+            bargainItems,
+            chosenMaster,
+            startTime);
+
+        if (timing is null)
+            return null;
 
         var newBooking = new BookingItem(
         Guid.NewGuid(),
         bargainItems,
             authenticatedUser.GetCustomer(),
-            master,
+            chosenMaster,
             String.Empty,
-            startTime,
-            endTime,
+            timing.Start,
+            timing.End,
             BookingStatus.WaitForApprove);
 
         await bookingRepository.Add(newBooking);
 
+        return newBooking;
     }
 }
