@@ -1,38 +1,43 @@
-﻿using HairMakerCRM.Core.Users;
+﻿using HairMakerCRM.Core.BargainItems;
+using HairMakerCRM.Core.Masters;
+using HairMakerCRM.Core.Users;
 
 namespace HairMakerCRM.Core.Booking;
 
 public interface IBookingService
 {
-    public Task<BookingItem?> CreateBooking(
-        DateTime StartTime,
-        List<BargainItem> BargainItems,
-        Master ChosenMaster);
+    public Task<BookingItem> CreateBooking(
+        DateTime startTime,
+        List<string> bargainItemIds,
+        string chosenMasterId);
 }
 
 public class BookingService(
     IBookingRepository bookingRepository,
     IBookingTimeResolver timeResolver,
-    IAuthenticatedUser authenticatedUser) : IBookingService
+    IAuthenticatedUser authenticatedUser,
+    IMasterRepository masterRepository,
+    IBargainItemRepository bargainItemRepository) : IBookingService
 {
-    public async Task<BookingItem?> CreateBooking(
+    public async Task<BookingItem> CreateBooking(
         DateTime startTime,
-        List<BargainItem> bargainItems,
-        Master chosenMaster)
+        List<string> bargainItemIds,
+        string chosenMasterId)
     {
+        var master = await masterRepository.GetMasterById(chosenMasterId);
+
+        var bargainItems = await bargainItemRepository.GetBargainItemsByIds(bargainItemIds);
+
         var timing = await timeResolver.Resolve(
             bargainItems,
-            chosenMaster,
+            master,
             startTime);
-
-        if (timing is null)
-            return null;
 
         var newBooking = new BookingItem(
         Guid.NewGuid(),
         bargainItems,
             authenticatedUser.GetCustomer(),
-            chosenMaster,
+            master,
             String.Empty,
             timing.Start,
             timing.End,

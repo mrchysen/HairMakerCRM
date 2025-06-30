@@ -1,8 +1,11 @@
-﻿namespace HairMakerCRM.Core.Booking;
+﻿using HairMakerCRM.Core.BargainItems;
+using HairMakerCRM.Core.Masters;
+
+namespace HairMakerCRM.Core.Booking;
 
 public interface IBookingTimeResolver
 {
-    Task<TimeResolveResult?> Resolve(
+    Task<TimeResolveResult> Resolve(
         List<BargainItem> bargainItems,
         Master master,
         DateTime startTime);
@@ -13,7 +16,7 @@ public record TimeResolveResult(DateTime Start, DateTime End);
 public class BookingTimeResolver(
     IBookingRepository bookingRepository) : IBookingTimeResolver
 {
-    public async Task<TimeResolveResult?> Resolve(
+    public async Task<TimeResolveResult> Resolve(
         List<BargainItem> bargainItems,
         Master master,
         DateTime startTime)
@@ -25,12 +28,13 @@ public class BookingTimeResolver(
         var existentBookingItems = await bookingRepository
             .GetByDateRangeAndMaster(DateTime.Now, endTime, master);
 
-        foreach (var item in existentBookingItems)
+        foreach (var timeSpanItem in existentBookingItems)
         {
-            if (item.EndTime >= startTime &&
-                endTime >= item.StartTime)
+            if (timeSpanItem.EndTime >= startTime &&
+                endTime >= timeSpanItem.StartTime)
             {
-                return null;
+                throw new TimeBusyException(
+                    $"Невозможно зарезервировать время с {startTime:dd.MM.yyyy с HH:mm} до {startTime:HH:mm}");
             }
         }
 

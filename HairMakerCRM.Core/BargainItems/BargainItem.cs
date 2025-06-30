@@ -1,4 +1,4 @@
-﻿namespace HairMakerCRM.Core;
+﻿namespace HairMakerCRM.Core.BargainItems;
 
 public record BargainItem(
     Guid Id, 

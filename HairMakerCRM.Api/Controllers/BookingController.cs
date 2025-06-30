@@ -19,11 +19,16 @@ public class BookingController(
     /// <returns></returns>
     public async Task<BookingItem> CreateBooking(CreateBookingRequest request)
     {
-        await createBookingRequestValidator.ValidateAsync(request);
+        await createBookingRequestValidator.ValidateAndThrowAsync(request);
 
-        return bookingService.CreateBooking(
+        return await bookingService.CreateBooking(
             request.StartTime, 
-            request.BargainItems, 
-            request.ChosenMaster);
+            request.BargainItemIds, 
+            request.ChosenMasterId);
+    }
+
+    public async Task<BookingItem> CancelBooking(string bookingId)
+    {
+
     }
 }

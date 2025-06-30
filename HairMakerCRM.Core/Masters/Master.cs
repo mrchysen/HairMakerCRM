@@ -1,4 +1,4 @@
-﻿namespace HairMakerCRM.Core;
+﻿namespace HairMakerCRM.Core.Masters;
 
 public record Master(
     string Name);

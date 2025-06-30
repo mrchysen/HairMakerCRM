@@ -1,4 +1,6 @@
-﻿namespace HairMakerCRM.Core.Booking;
+﻿using HairMakerCRM.Core.Masters;
+
+namespace HairMakerCRM.Core.Booking;
 
 public interface IBookingRepository
 {
@@ -96,7 +98,8 @@ public class BookingRepositoryMock : IBookingRepository
             _bookingItems.Where(el => 
                 master.Name == el.Master.Name &&
                 el.StartTime <=  startTime && 
-                el.EndTime <= endTime)
+                el.EndTime <= endTime &&
+                el.BookingStatus != BookingStatus.Canceled)
             .ToList());
     }
 
@@ -108,7 +111,7 @@ public class BookingRepositoryMock : IBookingRepository
     public async Task<BookingItem?> GetById(Guid id)
     {
         return await Task.FromResult(
-            _bookingItems.FirstOrDefault(c => c.Id == id, null));
+            _bookingItems.FirstOrDefault(c => c?.Id == id, null));
     }
 
     public Task Update(BookingItem bookingItem)

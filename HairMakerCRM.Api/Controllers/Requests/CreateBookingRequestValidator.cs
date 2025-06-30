@@ -6,9 +6,9 @@ public class CreateBookingRequestValidator : AbstractValidator<CreateBookingRequ
 {
     public CreateBookingRequestValidator()
     {
-        RuleFor(r => r.BargainItems).NotEmpty();
+        RuleFor(r => r.BargainItemIds).NotEmpty();
 
-        RuleFor(r => r.ChosenMaster).NotNull();
+        RuleFor(r => r.ChosenMasterId).NotNull();
 
         RuleFor(r => r.StartTime).Must(BeInFuture);
     }
