@@ -1,4 +1,4 @@
-﻿namespace HairMakerCRM.Core.Booking;
+﻿namespace HairMakerCRM.Core.Booking.Models;
 
 public class TimeBusyException : Exception
 {

@@ -1,10 +1,13 @@
-﻿using HairMakerCRM.Core.Masters;
+﻿using HairMakerCRM.Core.Booking.Models;
+using HairMakerCRM.Core.Masters;
 
 namespace HairMakerCRM.Core.Booking;
 
 public interface IBookingRepository
 {
     Task<IEnumerable<BookingItem>> GetAll();
+
+    Task<IEnumerable<BookingItem>> GetAllByParams();
 
     Task<BookingItem?> GetById(Guid id);
 
@@ -82,7 +85,6 @@ public class BookingRepositoryMock : IBookingRepository
 
         return Task.CompletedTask;
     }
-
 
     public async Task<IEnumerable<BookingItem>> GetAll()
     {

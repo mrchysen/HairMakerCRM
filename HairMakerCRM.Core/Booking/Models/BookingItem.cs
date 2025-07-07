@@ -1,7 +1,7 @@
 ﻿using HairMakerCRM.Core.BargainItems;
 using HairMakerCRM.Core.Masters;
 
-namespace HairMakerCRM.Core.Booking;
+namespace HairMakerCRM.Core.Booking.Models;
 
 public record BookingItem(
     Guid Id, 

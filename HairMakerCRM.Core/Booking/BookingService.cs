@@ -1,10 +1,11 @@
 ﻿using HairMakerCRM.Core.BargainItems;
+using HairMakerCRM.Core.Booking.Models;
 using HairMakerCRM.Core.Masters;
 using HairMakerCRM.Core.Users;
 
 namespace HairMakerCRM.Core.Booking;
 
-public interface IBookingService
+public interface ICreateBookingService
 {
     public Task<BookingItem> CreateBooking(
         DateTime startTime,
@@ -17,7 +18,7 @@ public class BookingService(
     IBookingTimeResolver timeResolver,
     IAuthenticatedUser authenticatedUser,
     IMasterRepository masterRepository,
-    IBargainItemRepository bargainItemRepository) : IBookingService
+    IBargainItemRepository bargainItemRepository) : ICreateBookingService
 {
     public async Task<BookingItem> CreateBooking(
         DateTime startTime,
