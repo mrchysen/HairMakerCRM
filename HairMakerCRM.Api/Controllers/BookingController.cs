@@ -9,8 +9,8 @@ namespace HairMakerCRM.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class BookingController(
-    ICreateBookingService createBookingService,
-    IBookingCanceler bookingCanceler,
+    ICreatingBookingService createBookingService,
+    ICancelingBookingService bookingCanceler,
     IBookingRepository bookingRepository,
     IValidator<CreateBookingRequest> createBookingRequestValidator) : ControllerBase
 {

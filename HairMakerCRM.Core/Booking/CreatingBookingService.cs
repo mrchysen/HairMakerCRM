@@ -5,7 +5,7 @@ using HairMakerCRM.Core.Users;
 
 namespace HairMakerCRM.Core.Booking;
 
-public interface ICreateBookingService
+public interface ICreatingBookingService
 {
     public Task<BookingItem> CreateBooking(
         DateTime startTime,
@@ -13,12 +13,12 @@ public interface ICreateBookingService
         string chosenMasterId);
 }
 
-public class BookingService(
+public class CreatingBookingService(
     IBookingRepository bookingRepository,
     IBookingTimeResolver timeResolver,
     IAuthenticatedUser authenticatedUser,
     IMasterRepository masterRepository,
-    IBargainItemRepository bargainItemRepository) : ICreateBookingService
+    IBargainItemRepository bargainItemRepository) : ICreatingBookingService
 {
     public async Task<BookingItem> CreateBooking(
         DateTime startTime,

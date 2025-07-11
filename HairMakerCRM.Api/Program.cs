@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddSingleton<IBookingRepository, BookingRepositoryMock>();
-builder.Services.AddScoped<ICreateBookingService, BookingService>();
+builder.Services.AddScoped<ICreatingBookingService, CreatingBookingService>();
 
 builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingRequestValidator>();
 

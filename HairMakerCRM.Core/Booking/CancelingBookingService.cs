@@ -2,12 +2,12 @@
 
 namespace HairMakerCRM.Core.Booking;
 
-public interface IBookingCanceler
+public interface ICancelingBookingService
 {
     Task Cancel(string bookingItemId);
 }
 
-public class BookingCanceler(IBookingRepository bookingRepository) : IBookingCanceler
+public class CancelingBookingService(IBookingRepository bookingRepository) : ICancelingBookingService
 {
     public async Task Cancel(string bookingItemId)
     {   // Сделать так чтобы мог снимать запись либо мастер, либо сам покупатель
